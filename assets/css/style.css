@@ -15,6 +15,13 @@ font-family: 'Lora', serif; */
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 html, body {
@@ -84,91 +91,146 @@ ul {
  *  Content
  */
 
- .content {
-   display: inline-grid;
-   grid-template-columns: 1fr 4fr;
-   height: calc(100vh - 21.6px - 22px);
-   width: 100%;
- }
+.content {
+  display: inline-grid;
+  grid-template-columns: 1fr 4fr;
+  height: calc(100vh - 21.6px - 22px);
+  width: 100%;
+}
 
- .content .hashtags,
- .content .post-hashtags {
-   font-family: 'Inconsolata', monospace;
- }
+.content .hashtags,
+.content .post-hashtags {
+  font-family: 'Inconsolata', monospace;
+}
 
- /*
-  *  Content --- Hashtags
-  */
+/*
+ *  Content --- Hashtags
+ */
 
- .content .hashtags {
-   border-right: 2px solid black;
-   font-size: 18px;
-   letter-spacing: 0.22px;
-   padding: 80px 2em;
- }
+.content .hashtags {
+  border-right: 2px solid black;
+  font-size: 18px;
+  letter-spacing: 0.22px;
+  padding: 80px 0;
+  display: flex;
+  justify-content: center;
+}
 
- .content .hashtags li {
-   margin-bottom: 0.7em;
-   padding: 0.1em 0.1em;
-   width: fit-content;
-   position: relative;
-   display: block;
- }
+.content .hashtags li {
+  margin-bottom: 0.7em;
+  padding: 0.1em 0.1em;
+  width: fit-content;
+  position: relative;
+  display: block;
+}
 
- .content .hashtags .hashtag-selected::after {
-   content: '';
-   border-bottom: 2px solid black;
-   width: 100%;
-   position: absolute;
-   right: 0;
-   top: 50%;
-   text-decoration: none;
- }
+.content .hashtags .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  text-decoration: none;
+}
 
-  /*
-   *  Content --- Posts
-   */
+.content .hashtags .switch .slider{
+  cursor: pointer;
+}
 
- .content .posts {
-   /* background-color: #00ff00; */
-   padding: 50px 2em;
- }
+.content .hashtags .switch .slider::after {
+  width: 0;
+  transition: width .5s;
+  content: '';
+  border-bottom: 2px solid black;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+}
 
- .content .post {
-   padding-bottom: 80px;
- }
+.content .hashtags .switch .slider:hover::after {
+  width: 90%;
+}
 
- .content .post-hashtags li {
-   color: #9b9b9b;
-   display: inline;
-   font-size: 12px;
-   letter-spacing: 0.16px;
- }
+.content .hashtags .switch input:checked + .slider::after {
+  content: '';
+  border-bottom: 2px solid black;
+  width: 90%;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+}
 
- .content .post-title {
-   font-family: 'Libre Franklin', sans-serif;
-   font-size: 30px;
-   font-weight: bold;
-   letter-spacing: 0.32px;
-   position: relative;
- }
+/*
+ *  Content --- Posts
+ */
 
- .content .minsread-label {
-   background-color: #005AFF;
-   color: #fff;
-   display: none;
-   font-family: 'Inconsolata', monospace;
-   font-size: 20px;
-   letter-spacing: 20px;
-   position: absolute;
-   top: 0;
-   width: 100%;
-   height: 100%;
-   z-index: 2;
- }
+.content .posts {
+  padding: 50px 2em;
+}
 
- .content .minsread-label p {
-   position: absolute;
-   margin-top: -0.5em;
-   top: 50%;
- }
+.content .post {
+  padding-bottom: 80px;
+}
+
+.content .post-hashtags {
+  padding-bottom: 12px;
+}
+
+.content .post-hashtags li {
+  color: #9b9b9b;
+  display: inline;
+  font-size: 12px;
+  letter-spacing: 0.16px;
+}
+
+.content .post-title {
+  display: inline-block;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 0.32px;
+  position: relative;
+}
+
+.content .nothing {
+  display: none;
+  margin-top: 30px; 
+}
+
+.content .minsread-label {
+  background-color: #005AFF;
+  color: #fff;
+  display: none;
+  font-family: 'Inconsolata', monospace;
+  font-size: 20px;
+  letter-spacing: 20px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.content .minsread-label p {
+  margin-left: 1.5em;
+  position: absolute;
+  margin-top: -0.5em;
+  top: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+  .content {
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    height: calc(100vh - 21.6px - 22px);
+    width: 100%;
+  }
+
+  .content .hashtags {
+    border-right: none;
+    display: block;
+    width: 100%;
+  }
+
+  .content .hashtags li {
+    display: inline-block;
+  }
+}
