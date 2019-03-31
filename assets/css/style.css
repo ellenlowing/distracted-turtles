@@ -24,8 +24,8 @@ font-family: 'Lora', serif; */
                                   supported by Chrome and Opera */
 }
 
-html, body {
-
+body {
+  overflow: hidden;
 }
 
 a,
@@ -45,7 +45,6 @@ ul {
  */
 
 .header {
-  /* background-color: #005AFF; */
   border-bottom: 2px solid black;
   letter-spacing: 0.32px;
   font-family: 'Karla', sans-serif;
@@ -92,9 +91,9 @@ ul {
  */
 
 .content {
-  display: inline-grid;
+  display: grid;
   grid-template-columns: 1fr 4fr;
-  height: calc(100vh - 21.6px - 22px);
+  height: calc(100vh - 1.2em - 24px);
   width: 100%;
 }
 
@@ -163,6 +162,7 @@ ul {
  */
 
 .content .posts {
+  overflow-y: scroll;
   padding: 50px 2em;
 }
 
@@ -192,7 +192,7 @@ ul {
 
 .content .nothing {
   display: none;
-  margin-top: 30px; 
+  margin-top: 30px;
 }
 
 .content .minsread-label {
@@ -217,20 +217,35 @@ ul {
 }
 
 @media only screen and (max-width: 768px) {
+
+  .header {
+    font-size: 14px;
+  }
+
   .content {
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     height: calc(100vh - 21.6px - 22px);
     width: 100%;
   }
 
   .content .hashtags {
+    border-bottom: 2px solid black;
     border-right: none;
     display: block;
+    font-size: 14px;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    padding-left: 2em;
     width: 100%;
   }
 
   .content .hashtags li {
+    color: #000;
     display: inline-block;
+    margin-bottom: 0;
+    padding: 0.2em;
+    text-align: center;
   }
 }
