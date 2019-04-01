@@ -9,6 +9,7 @@ font-family: 'Lora', serif; */
  */
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   margin-block-start: 0;
@@ -25,6 +26,8 @@ font-family: 'Lora', serif; */
 }
 
 body {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -47,11 +50,14 @@ ul {
 .header {
   border-bottom: 2px solid black;
   letter-spacing: 0.32px;
+  line-height: 18px;
   font-family: 'Karla', sans-serif;
   font-size: 18px;
   font-weight: normal;
+  height: calc(20px + 1.2em);
   overflow: hidden;
   padding: 0.6em 0.6em;
+  z-index: 3;
 }
 
 .header a {
@@ -92,26 +98,26 @@ ul {
 }
 
 /*
- *  Content
+ *  Blog Index
  */
 
-.content {
+.blog-index {
   display: grid;
   grid-template-columns: 1fr 4fr;
   height: calc(100vh - 1.2em - 24px);
   width: 100%;
 }
 
-.content .hashtags,
-.content .post-hashtags {
+.blog-index .hashtags,
+.blog-index .post-hashtags {
   font-family: 'Inconsolata', monospace;
 }
 
 /*
- *  Content --- Hashtags
+ *  Blog Index --- Hashtags
  */
 
-.content .hashtags {
+.blog-index .hashtags {
   border-right: 2px solid black;
   font-size: 18px;
   letter-spacing: 0.22px;
@@ -120,7 +126,7 @@ ul {
   justify-content: center;
 }
 
-.content .hashtags li {
+.blog-index .hashtags li {
   margin-bottom: 0.7em;
   padding: 0.1em 0.1em;
   width: fit-content;
@@ -128,7 +134,7 @@ ul {
   display: block;
 }
 
-.content .hashtags .switch input {
+.blog-index .hashtags .switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -136,11 +142,11 @@ ul {
   float: left;
 }
 
-.content .hashtags .switch .slider{
+.blog-index .hashtags .switch .slider{
   cursor: pointer;
 }
 
-.content .hashtags .switch .slider::after {
+.blog-index .hashtags .switch .slider::after {
   width: 0;
   transition: width .5s;
   content: '';
@@ -150,11 +156,11 @@ ul {
   top: 50%;
 }
 
-.content .hashtags .switch .slider:hover::after {
+.blog-index .hashtags .switch .slider:hover::after {
   width: 98%;
 }
 
-.content .hashtags .switch input:checked + .slider::after {
+.blog-index .hashtags .switch input:checked + .slider::after {
   content: '';
   border-bottom: 2px solid black;
   width: 98%;
@@ -164,30 +170,30 @@ ul {
 }
 
 /*
- *  Content --- Posts
+ *  Blog Index --- Posts
  */
 
-.content .posts {
+.blog-index .posts {
   overflow-y: scroll;
   padding: 50px 2em;
 }
 
-.content .post {
+.blog-index .post {
   padding-bottom: 80px;
 }
 
-.content .post-hashtags {
+.blog-index .post-hashtags {
   padding-bottom: 12px;
 }
 
-.content .post-hashtags li {
+.blog-index .post-hashtags li {
   color: #9b9b9b;
   display: inline;
   font-size: 12px;
   letter-spacing: 0.16px;
 }
 
-.content .post-title {
+.blog-index .post-title {
   display: inline-block;
   font-family: 'Libre Franklin', sans-serif;
   font-size: 30px;
@@ -196,12 +202,12 @@ ul {
   position: relative;
 }
 
-.content .nothing {
+.blog-index .nothing {
   display: none;
   margin-top: 30px;
 }
 
-.content .minsread-label {
+.blog-index .minsread-label {
   background-color: #005AFF;
   color: #fff;
   display: none;
@@ -215,17 +221,95 @@ ul {
   z-index: 2;
 }
 
-.content .minsread-label p {
+.blog-index .minsread-label p {
   margin-left: 1.5em;
   position: absolute;
   margin-top: -0.5em;
   top: 50%;
 }
 
+/*
+ *  Blog Single Page
+ */
+
+.blog-single {
+  overflow-y: scroll;
+  padding: 3em 15em;
+  position: absolute;
+  top: 41.6px;
+  width: 100%;
+  bottom: 0;
+}
+
+.blog-single .heading {
+  padding-bottom: 2em;
+}
+
+.blog-single .heading > * {
+  padding-bottom: 0.5em;
+}
+
+.blog-single .hashtags,
+.blog-single .date,
+.blog-single .minsread {
+  font-family: 'Inconsolata', monospace;
+  font-size: 20px;
+  letter-spacing: 0.16px;
+}
+
+/* .blog-single .hashtags {
+  padding-bottom: 12px;
+} */
+
+.blog-single .hashtags li,
+.blog-single .date,
+.blog-single .minsread {
+  color: #9b9b9b;
+  display: inline;
+  font-size: 12px;
+  letter-spacing: 0.16px;
+}
+
+.blog-single .minsread {
+  padding-left: 3em;
+}
+
+.blog-single .title {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+  color: #fff;
+  -webkit-text-stroke: 1px #005AFF;
+  /* padding-bottom: 1em; */
+}
+
+.blog-single .subtitle {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 18px;
+  font-weight: lighter;
+  letter-spacing: 0.18px;
+  /* padding-bottom: 1em; */
+}
+
+.blog-single .paragraph {
+  padding-bottom: 1em;
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  letter-spacing: 0.22px;
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 767px) {
+  .blog-single {
+    padding: 3em 10em;
+  }
+}
+
 @media only screen and (max-width: 768px) {
 
   .header {
     font-size: 14px;
+    height: calc(18px + 1.2em);
   }
 
   .header-left {
@@ -251,7 +335,7 @@ ul {
     width: 0;
   }
 
-  .content {
+  .blog-index {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
@@ -259,7 +343,7 @@ ul {
     width: 100%;
   }
 
-  .content .hashtags {
+  .blog-index .hashtags {
     border-bottom: 2px solid black;
     border-right: none;
     display: block;
@@ -268,7 +352,7 @@ ul {
     width: 100%;
   }
 
-  .content .hashtags li {
+  .blog-index .hashtags li {
     color: #000;
     display: inline-block;
     margin-bottom: 0;
@@ -277,33 +361,51 @@ ul {
     text-align: center;
   }
 
-  .content .hashtags .switch .slider:hover::after {
+  .blog-index .hashtags .switch .slider:hover::after {
     width: 86%;
   }
 
-  .content .hashtags .switch .slider::after {
+  .blog-index .hashtags .switch .slider::after {
     right: 5px;
   }
 
-  .content .hashtags .switch input:checked + .slider::after {
+  .blog-index .hashtags .switch input:checked + .slider::after {
     right: 5px;
     width: 86%;
   }
 
-  .content .posts {
+  .blog-index .posts {
     padding: 20px 1.2em;
   }
 
-  .content .post {
+  .blog-index .post {
     padding-bottom: 40px;
   }
 
-  .content .post-title {
+  .blog-index .post-title {
     font-size: 20px;
   }
 
-  .content .minsread-label {
+  .blog-index .minsread-label {
     font-size: 12px;
     letter-spacing: 12px;
+  }
+
+  .blog-single {
+    padding: 1em 1em;
+    top: 34.8px;
+  }
+
+  .blog-single .title {
+    font-size: 30px;
+    letter-spacing: 0.6px;
+  }
+
+  .blog-single .subtitle {
+    font-size: 12px;
+  }
+
+  .blog-single .paragraph {
+    font-size: 16px;
   }
 }
