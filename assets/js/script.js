@@ -1,3 +1,4 @@
+var colors = ['#8d9876', '#cbb345', '#609f80', '#4b574d', '#af420a', '#314856', '#ecbbad', '#798881', '#9d5141', '#a67f48', '#cb654f', '#cfcb9c', '#8cbea3', '#dfba47'];
 init();
 
 function init () {
@@ -5,6 +6,14 @@ function init () {
   $('.post-title').on( 'mouseenter', function() {
     var label = $(this).children().children('.minsread-label');
     label.show();
+    label.css('background-color', function() {
+      var randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
+      var bgcolor = rgb2hex(label.css('background-color'));
+      while(randcolor == bgcolor) {
+        randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
+      }
+      return randcolor;
+    });
     var fullText = '8 mins read ';
     var movingText = '';
     var charCount = label.width() / (parseFloat(label.css('font-size')) + parseFloat(label.css('letter-spacing')) / 2) - 2;
@@ -37,9 +46,8 @@ function init () {
       if($(this).prop('checked')) {
         showAll = false;
       }
-      console.log($(this).prop('checked'));
     });
-    
+
     if(showAll) {
       $('.post').show();
     } else {
@@ -62,4 +70,16 @@ function init () {
 
 function update () {
 
+}
+
+var hexDigits = new Array("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
+
+// Function to convert rgb color to hex format
+function rgb2hex(rgb) {
+  rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+function hex(x) {
+  return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
 }
