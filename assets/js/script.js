@@ -4,6 +4,30 @@ var colors = ['#8d9876', '#cbb345', '#609f80', '#4b574d', '#af420a', '#314856', 
 init();
 
 function init () {
+  // reset elements to default after css transitions
+  console.log($('.hashtags').outerHeight());
+  if( $(window).width() <= 768 ) $('.posts').css('top', $('.hashtags').outerHeight() + 'px');
+  $('.hashtags li').hide();
+  $('.posts li').hide();
+  $('.hashtags').css('padding', '0');
+  $('.posts').css('padding', '0');
+  $('.blog-index').css('height', '0');
+  setTimeout( () => {
+    $('*').attr('style', '');
+    if( $(window).width() <= 768 ) $('.posts').css('top', $('.hashtags').outerHeight() + 'px');
+  }, 2000);
+  setTimeout( () => {
+    $('.fade-in').removeClass('fade-in');
+  }, 2500);
+  setTimeout( () => {
+    $('.zero-opacity').removeClass('zero-opacity'); // for fadeinandup transitions
+  }, 3500);
+  setTimeout( () => {
+    $('*').css('animation', 'none');
+  }, 4500);
+
+  $( window ).resize(resize);
+
   $('.post-title').on( 'mouseenter', function() {
     var label = $(this).children().children('.minsread-label');
     label.show();
@@ -71,30 +95,14 @@ function init () {
       }
     }
   });
-
-  // console.log($('.hashtags').css('padding'));
-  // reset elements to default after css transitions
-  $('.hashtags li').hide();
-  $('.posts li').hide();
-  $('.hashtags').css('padding', '0');
-  $('.posts').css('padding', '0');
-  setInterval( () => {
-    $('.hashtags li').attr('style', '');
-    $('.posts li').attr('style', '');
-    $('.padding-zero').removeClass('padding-zero');
-    $('.hashtags').attr('style', '');
-    $('.posts').attr('style', '');
-    // if( $(window).width() <= 768 ) $('.hashtags').css('padding', '0.6em 1em');
-    // else $('.hashtags').css('padding', '80px 0');
-    // $('.posts').css('padding', '50px 2em');
-  }, 1000);
-  setInterval( () => {
-    $('.fade-in').removeClass('fade-in');
-  }, 2500);
 }
 
 function update () {
 
+}
+
+function resize () {
+  if( $(window).width() <= 768 ) $('.posts').css('top', $('.hashtags').outerHeight() + 'px');
 }
 
 var hexDigits = new Array("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
