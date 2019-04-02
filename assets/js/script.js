@@ -1,8 +1,9 @@
+
+var interval;
 var colors = ['#8d9876', '#cbb345', '#609f80', '#4b574d', '#af420a', '#314856', '#ecbbad', '#798881', '#9d5141', '#a67f48', '#cb654f', '#cfcb9c', '#8cbea3', '#dfba47'];
 init();
 
 function init () {
-  var interval;
   $('.post-title').on( 'mouseenter', function() {
     var label = $(this).children().children('.minsread-label');
     label.show();
@@ -24,12 +25,16 @@ function init () {
       else charIter = 0;
     }
     label.find('p').html(movingText);
-    interval = setInterval( function() {
-      label.find('p').html(movingText);
-      movingText = movingText.substr(1) + fullText.charAt(charIter);
-      if(charIter < (fullText.length-1)) charIter++;
-      else charIter = 0;
-    }, 200);
+    setTimeout( () => {
+      clearInterval(interval);
+      interval = setInterval( function() {
+        label.find('p').html(movingText);
+        movingText = movingText.substr(1) + fullText.charAt(charIter);
+        if(charIter < (fullText.length-1)) charIter++;
+        else charIter = 0;
+      }, 300);
+    }, 800 );
+
 
   }).on('mouseleave', function() {
     $(this).children().children('.minsread-label').hide();
@@ -66,6 +71,26 @@ function init () {
       }
     }
   });
+
+  // console.log($('.hashtags').css('padding'));
+  // reset elements to default after css transitions
+  $('.hashtags li').hide();
+  $('.posts li').hide();
+  $('.hashtags').css('padding', '0');
+  $('.posts').css('padding', '0');
+  setInterval( () => {
+    $('.hashtags li').attr('style', '');
+    $('.posts li').attr('style', '');
+    $('.padding-zero').removeClass('padding-zero');
+    $('.hashtags').attr('style', '');
+    $('.posts').attr('style', '');
+    // if( $(window).width() <= 768 ) $('.hashtags').css('padding', '0.6em 1em');
+    // else $('.hashtags').css('padding', '80px 0');
+    // $('.posts').css('padding', '50px 2em');
+  }, 1000);
+  setInterval( () => {
+    $('.fade-in').removeClass('fade-in');
+  }, 2500);
 }
 
 function update () {
