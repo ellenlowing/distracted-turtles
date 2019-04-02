@@ -5,26 +5,28 @@ init();
 
 function init () {
   // reset elements to default after css transitions
-  console.log($('.hashtags').outerHeight());
   if( $(window).width() <= 768 ) $('.posts').css('top', $('.hashtags').outerHeight() + 'px');
   $('.hashtags li').hide();
   $('.posts li').hide();
   $('.hashtags').css('padding', '0');
   $('.posts').css('padding', '0');
   $('.blog-index').css('height', '0');
+
   setTimeout( () => {
     $('*').attr('style', '');
     if( $(window).width() <= 768 ) $('.posts').css('top', $('.hashtags').outerHeight() + 'px');
-  }, 2000);
+  }, Number($('.growing-width').css('animation-duration').slice(0, -1)) * 1000);
   setTimeout( () => {
     $('.fade-in').removeClass('fade-in');
-  }, 2500);
+  }, (Number($('.fade-in').css('animation-duration').slice(0, -1)) + Number($('.fade-in').css('animation-delay').slice(0, -1))) * 1000 - 500);
   setTimeout( () => {
     $('.zero-opacity').removeClass('zero-opacity'); // for fadeinandup transitions
-  }, 3500);
+  },  (Number( $('.zero-opacity').children().last().css('animation-delay').slice(0, -1)) + Number($('.zero-opacity').children().last().css('animation-duration').slice(0, -1)) ) * 1000 );
   setTimeout( () => {
     $('*').css('animation', 'none');
-  }, 4500);
+  },  (Number( $('.zero-opacity').children().last().css('animation-delay').slice(0, -1)) + Number($('.zero-opacity').children().last().css('animation-duration').slice(0, -1)) ) * 1000 + 1000);
+
+  console.log((Number( $('.zero-opacity').children().last().css('animation-delay').slice(0, -1)) + Number($('.zero-opacity').children().last().css('animation-duration').slice(0, -1)) ) * 1000)
 
   $( window ).resize(resize);
 

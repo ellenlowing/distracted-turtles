@@ -4,12 +4,12 @@
 
 $num-menulabels: 4;
 $num-hashtags: 5;
-$num-posts: 4;
+$num-posts: 8;
 
 .blog-index .posts ul li {
   @for $i from 1 through $num-posts {
     &:nth-child(#{$i}) {
-      animation: fadeinandup 1s ease #{1 + $i * .1}s;
+      animation: fadeinandup 1s ease #{0.5 + $i * .1}s;
     }
   }
 }
@@ -20,27 +20,27 @@ $num-posts: 4;
 
 .fade-in {
   opacity: 0;
-  -webkit-animation: fadein 1s ease 2s; /* Safari, Chrome and Opera > 12.1 */
-      -moz-animation: fadein 1s ease 2s; /* Firefox < 16 */
-       -ms-animation: fadein 1s ease 2s; /* Internet Explorer */
-        -o-animation: fadein 1s ease 2s; /* Opera < 12.1 */
-           animation: fadein 1s ease 2s;
+  -webkit-animation: fadein 1s ease 1s; /* Safari, Chrome and Opera > 12.1 */
+      -moz-animation: fadein 1s ease 1s; /* Firefox < 16 */
+       -ms-animation: fadein 1s ease 1s; /* Internet Explorer */
+        -o-animation: fadein 1s ease 1s; /* Opera < 12.1 */
+           animation: fadein 1s ease 1s;
 }
 
 .growing-width {
-  -webkit-animation: growingwidth 2s ease; /* Safari, Chrome and Opera > 12.1 */
-      -moz-animation: growingwidth 2s ease; /* Firefox < 16 */
-       -ms-animation: growingwidth 2s ease; /* Internet Explorer */
-        -o-animation: growingwidth 2s ease; /* Opera < 12.1 */
-           animation: growingwidth 2s ease;
+  -webkit-animation: growingwidth 1s ease; /* Safari, Chrome and Opera > 12.1 */
+      -moz-animation: growingwidth 1s ease; /* Firefox < 16 */
+       -ms-animation: growingwidth 1s ease; /* Internet Explorer */
+        -o-animation: growingwidth 1s ease; /* Opera < 12.1 */
+           animation: growingwidth 1s ease;
 }
 
 .growing-height {
-  -webkit-animation: growingheight 2s ease 0.5s; /* Safari, Chrome and Opera > 12.1 */
-      -moz-animation: growingheight 2s ease 0.5s; /* Firefox < 16 */
-       -ms-animation: growingheight 2s ease 0.5s; /* Internet Explorer */
-        -o-animation: growingheight 2s ease 0.5s; /* Opera < 12.1 */
-           animation: growingheight 2s ease 0.5s;
+  -webkit-animation: growingheight 1s ease 0.5s; /* Safari, Chrome and Opera > 12.1 */
+      -moz-animation: growingheight 1s ease 0.5s; /* Firefox < 16 */
+       -ms-animation: growingheight 1s ease 0.5s; /* Internet Explorer */
+        -o-animation: growingheight 1s ease 0.5s; /* Opera < 12.1 */
+           animation: growingheight 1s ease 0.5s;
 }
 
 @keyframes fadein {
