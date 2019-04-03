@@ -26,8 +26,6 @@ function init () {
     $('*').css('animation', 'none');
   },  (Number( $('.zero-opacity').children().last().css('animation-delay').slice(0, -1)) + Number($('.zero-opacity').children().last().css('animation-duration').slice(0, -1)) ) * 1000 + 1000);
 
-  console.log((Number( $('.zero-opacity').children().last().css('animation-delay').slice(0, -1)) + Number($('.zero-opacity').children().last().css('animation-duration').slice(0, -1)) ) * 1000)
-
   $( window ).resize(resize);
 
   $('.post-title').on( 'mouseenter', function() {

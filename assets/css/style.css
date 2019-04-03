@@ -48,7 +48,7 @@ ul {
  */
 
 .header {
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   letter-spacing: 0.32px;
   line-height: 18px;
   font-family: 'Karla', sans-serif;
@@ -121,10 +121,10 @@ ul {
  */
 
 .blog-index .hashtags {
-  border-right: 2px solid black;
-  font-size: 18px;
+  border-right: 1px solid black;
+  font-size: 14px;
   letter-spacing: 0.22px;
-  padding: 80px 0; /* was 80px 0 */
+  padding: 40px 0;
   display: flex;
   justify-content: center;
   -webkit-animation: none;
@@ -184,7 +184,8 @@ ul {
 .blog-index .posts {
   border-top: none;
   overflow-y: scroll;
-  padding: 50px 2em; /* was 50px 2em */
+  /* -webkit-overflow-scrolling: touch; */
+  padding: 40px 2em; /* was 50px 2em */
   width: 100%;
 }
 
@@ -318,18 +319,43 @@ ul {
 }
 
 .blog-single .paragraph img {
-  padding: 1em 2em;
+  padding: 0 2em;
   width: 100%;
   height: auto;
+}
+
+.blog-single .paragraph .iframe-wrapper {
+  padding: 80% 0 0 0;
+  position: relative;
+}
+
+.blog-single .paragraph .iframe-wrapper iframe {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 767px) {
   .blog-single {
     padding: 3em 10em;
   }
+
+  .blog-single .paragraph img {
+    padding: 0 1.2em;
+  }
+
+  .blog-single .paragraph .iframe-wrapper {
+    padding: 80% 0 0 0;
+  }
 }
 
 @media only screen and (max-width: 768px) {
+
+  /*
+   *  Header
+   */
 
   .header {
     font-size: 14px;
@@ -358,6 +384,10 @@ ul {
   .header-right .remigai:hover::after {
     width: 0;
   }
+
+  /*
+   *  Blog Index Page --- Hashtags
+   */
 
   .blog-index {
     display: grid;
@@ -397,11 +427,16 @@ ul {
     width: 86%;
   }
 
+  /*
+   *  Blog Index Page --- Posts
+   */
+
   .blog-index .posts {
-    border-top: 2px solid black;
+    border-top: 1px solid black;
     padding: 20px 1.2em;
     position: absolute;
     width: 100%;
+    bottom: 0;
   }
 
   .blog-index .post {
@@ -416,6 +451,10 @@ ul {
     font-size: 12px;
     letter-spacing: 12px;
   }
+
+  /*
+   *  Blog Single Page
+   */
 
   .blog-single {
     padding: 1em 1em;
@@ -433,5 +472,13 @@ ul {
 
   .blog-single .paragraph {
     font-size: 16px;
+  }
+
+  .blog-single .paragraph img {
+    padding: 0;
+  }
+
+  .blog-single .paragraph .iframe-wrapper {
+    padding: 90% 0 0 0;
   }
 }
