@@ -106,6 +106,10 @@ ul {
   width: 100%;
 }
 
+.header-right .active::after {
+  width: 100%;
+}
+
 .header-right .socialmedia > * {
   display:inline-block;
   padding: 0 2px;
