@@ -1,7 +1,12 @@
 
 var interval;
 var colors = ['#8d9876', '#cbb345', '#609f80', '#4b574d', '#af420a', '#314856', '#ecbbad', '#798881', '#9d5141', '#a67f48', '#cb654f', '#cfcb9c', '#8cbea3', '#dfba47'];
-init();
+var mobileMode = false;
+
+$(document).ready(() => {
+	if(isMobile()) mobileMode = true;
+	init();
+});
 
 function init () {
   // reset elements to default after css transitions
@@ -28,42 +33,77 @@ function init () {
 
   $( window ).resize(resize);
 
-  $('.post-title').on( 'mouseenter', function() {
-    var label = $(this).children().children('.minsread-label');
-    label.show();
-    label.css('background-color', function() {
-      var randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
-      var bgcolor = rgb2hex(label.css('background-color'));
-      while(randcolor == bgcolor) {
-        randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
-      }
-      return randcolor;
-    });
-    var fullText = '8 mins read ';
-    var movingText = '';
-    var charCount = label.width() / (parseFloat(label.css('font-size')) + parseFloat(label.css('letter-spacing')) / 2) - 2;
-    var charIter = 0;
-    for(var i = 0; i < charCount; i++) {
-      movingText = movingText + fullText.charAt(charIter);
-      if(charIter < (fullText.length-1)) charIter++;
-      else charIter = 0;
-    }
-    label.find('p').html(movingText);
-    setTimeout( () => {
-      clearInterval(interval);
-      interval = setInterval( function() {
-        label.find('p').html(movingText);
-        movingText = movingText.substr(1) + fullText.charAt(charIter);
+  if(mobileMode) {
+    $('.post-title').on( 'touchstart', function() {
+      var label = $(this).children().children('.minsread-label');
+      label.show();
+      label.css('background-color', function() {
+        var randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
+        var bgcolor = rgb2hex(label.css('background-color'));
+        while(randcolor == bgcolor) {
+          randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
+        }
+        return randcolor;
+      });
+      var fullText = '8 mins read ';
+      var movingText = '';
+      var charCount = label.width() / (parseFloat(label.css('font-size')) + parseFloat(label.css('letter-spacing')) / 2);
+      var charIter = 0;
+      for(var i = 0; i < charCount; i++) {
+        movingText = movingText + fullText.charAt(charIter);
         if(charIter < (fullText.length-1)) charIter++;
         else charIter = 0;
-      }, 300);
-    }, 800 );
-
-
-  }).on('mouseleave', function() {
-    $(this).children().children('.minsread-label').hide();
-    clearInterval(interval);
-  });
+      }
+      label.find('p').html(movingText);
+      setTimeout( () => {
+        clearInterval(interval);
+        interval = setInterval( function() {
+          label.find('p').html(movingText);
+          movingText = movingText.substr(1) + fullText.charAt(charIter);
+          if(charIter < (fullText.length-1)) charIter++;
+          else charIter = 0;
+        }, 300);
+      }, 800 );
+    }).on('touchend', function() {
+      $(this).children().children('.minsread-label').hide();
+      clearInterval(interval);
+    });
+  } else {
+    $('.post-title').on( 'mouseenter', function() {
+      var label = $(this).children().children('.minsread-label');
+      label.show();
+      label.css('background-color', function() {
+        var randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
+        var bgcolor = rgb2hex(label.css('background-color'));
+        while(randcolor == bgcolor) {
+          randcolor = colors[Math.floor(Math.random() * Math.floor(colors.length))];
+        }
+        return randcolor;
+      });
+      var fullText = '8 mins read ';
+      var movingText = '';
+      var charCount = label.width() / (parseFloat(label.css('font-size')) + parseFloat(label.css('letter-spacing')) / 2) - 2;
+      var charIter = 0;
+      for(var i = 0; i < charCount; i++) {
+        movingText = movingText + fullText.charAt(charIter);
+        if(charIter < (fullText.length-1)) charIter++;
+        else charIter = 0;
+      }
+      label.find('p').html(movingText);
+      setTimeout( () => {
+        clearInterval(interval);
+        interval = setInterval( function() {
+          label.find('p').html(movingText);
+          movingText = movingText.substr(1) + fullText.charAt(charIter);
+          if(charIter < (fullText.length-1)) charIter++;
+          else charIter = 0;
+        }, 300);
+      }, 800 );
+    }).on('mouseleave', function() {
+      $(this).children().children('.minsread-label').hide();
+      clearInterval(interval);
+    });
+  }
 
   $('.switch input').on('change', (e) => {
 
@@ -115,4 +155,13 @@ function rgb2hex(rgb) {
 
 function hex(x) {
   return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+}
+
+function isMobile() {
+  var md = new MobileDetect(window.navigator.userAgent);
+  if(md.mobile()){
+    return true;
+  } else {
+    return false;
+  }
 }

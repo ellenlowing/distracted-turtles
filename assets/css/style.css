@@ -16,13 +16,14 @@ font-family: 'Lora', serif; */
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
   -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+  /* -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;  */
 }
 
 body {
@@ -39,9 +40,17 @@ a:visited {
   text-decoration: none;
 }
 
+a:active {
+  background-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 ul {
   list-style: none;
 }
+
+::-moz-selection { color: #26A69A; }
+::selection { color: #26A69A; }
 
 /*
  *  Header
@@ -252,6 +261,9 @@ ul {
   position: absolute;
   margin-top: -0.5em;
   top: 50%;
+  line-height: 20px;
+  height: 20px;
+  overflow: hidden;
 }
 
 /*
@@ -466,6 +478,12 @@ ul {
   .blog-index .minsread-label {
     font-size: 12px;
     letter-spacing: 12px;
+  }
+
+  .blog-index .minsread-label p {
+    line-height: 14px;
+    height: 14px;
+    overflow: hidden;
   }
 
   /*
